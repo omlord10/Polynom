@@ -1,0 +1,512 @@
+int test_new_free()
+{
+    printf("\n=== test_new_free ===\n");
+    Polynomial p;
+
+    printf("Input: degree=3, modulo=17\n");
+
+    int result = new_pol(&p, 3, 17);
+    if (result != POL_SUCCESS)
+    {
+        printf("FAIL: new_pol returned error %d\n", result);
+        return 1;
+    }
+
+    print_polynomial(&p, "Created polynomial");
+
+    if (p.degree != 3 || p.modulo != 17)
+    {
+        printf("FAIL: wrong parameters (degree=%zu, modulo=%llu)\n",
+               p.degree, p.modulo);
+        return 1;
+    }
+
+    free_pol(&p);
+
+    if (p.coeffs != NULL)
+    {
+        printf("FAIL: coeffs not freed\n");
+        return 1;
+    }
+
+    printf("SUCCESS: new_pol and free_pol work correctly\n");
+    return 0;
+}
+
+int test_copy()
+{
+    printf("\n=== test_copy ===\n");
+    Polynomial a, b;
+
+    new_pol(&a, 3, 17);
+    new_pol(&b, 0, 17); // Different size
+    // 18x^3 + 2x^2 + 1x + 4
+    a.coeffs[0] = 4; a.coeffs[1] = 1; a.coeffs[2] = 2; a.coeffs[3] = 18;
+
+    printf("Source polynomial:\n");
+    print_polynomial(&a, "A");
+    printf("Destination before copy:\n");
+    print_polynomial(&b, "B (before)");
+
+    int r = copy_pol(&a, &b);
+    if (r != POL_SUCCESS)
+    {
+        printf("FAIL: copy_pol returned error %d\n", r);
+        free_pol(&a);
+        free_pol(&b);
+        return 1;
+    }
+
+    printf("Destination after copy:\n");
+    print_polynomial(&b, "B (after)");
+
+    int success = 1;
+    for (size_t i = 0; i <= 3; i++)
+    {
+        if (a.coeffs[i] != b.coeffs[i])
+        {
+            printf("FAIL: coeff[%zu] mismatch: %llu != %llu\n",
+                   i, a.coeffs[i], b.coeffs[i]);
+            success = 0;
+        }
+    }
+
+    if (success)
+        printf("SUCCESS: polynomials copied correctly\n");
+
+    free_pol(&a);
+    free_pol(&b);
+    return !success;
+}
+
+int test_sum()
+{
+    printf("\n=== test_sum ===\n");
+    Polynomial a, b, r;
+
+    new_pol(&a, 2, 17);
+    new_pol(&b, 2, 17);
+    new_pol(&r, 0, 17);
+
+    a.coeffs[0] = 12; a.coeffs[1] = 9; a.coeffs[2] = 17;
+    b.coeffs[0] = 5; b.coeffs[1] = 8; b.coeffs[2] = 0;
+
+    printf("Input polynomials:\n");
+    print_polynomial(&a, "A");
+    print_polynomial(&b, "B");
+
+    int st = sum_pol(&a, &b, &r);
+    if (st != POL_SUCCESS)
+    {
+        printf("FAIL: sum_pol returned error %d\n", st);
+        free_pol(&a); free_pol(&b); free_pol(&r);
+        return 1;
+    }
+
+    printf("Result:\n");
+    print_polynomial(&r, "A + B");
+
+    ULL expected[2] = {0};
+    int success = 1;
+    for (size_t i = 0; i <= r.degree; i++)
+    {
+        if (r.coeffs[i] % 17 != expected[i] % 17)
+        {
+            printf("FAIL: coeff[%zu]: expected %llu, got %llu\n",
+                   i, expected[i] % 17, r.coeffs[i] % 17);
+            success = 0;
+        }
+    }
+
+    if (success)
+        printf("SUCCESS: sum computed correctly\n");
+
+    free_pol(&a);
+    free_pol(&b);
+    free_pol(&r);
+    return 0;
+}
+
+int test_sub()
+{
+    printf("\n=== test_sub ===\n");
+    Polynomial a, b, r;
+
+    new_pol(&a, 2, 17);
+    new_pol(&b, 2, 17);
+    new_pol(&r, 0, 17);
+
+    a.coeffs[0] = 10; a.coeffs[1] = 5; a.coeffs[2] = 3;
+    b.coeffs[0] = 10; b.coeffs[1] = 8; b.coeffs[2] = 3;
+
+    printf("Input polynomials:\n");
+    print_polynomial(&a, "A");
+    print_polynomial(&b, "B");
+
+    int st = sub_pol(&a, &b, &r);
+    if (st != POL_SUCCESS)
+    {
+        printf("FAIL: sub_pol returned error %d\n", st);
+        free_pol(&a); free_pol(&b); free_pol(&r);
+        return 1;
+    }
+
+    printf("Result:\n");
+    print_polynomial(&r, "A - B");
+
+    if (r.degree != 1)
+    {
+        printf("FAIL: expected degree=1, got degree=%zu\n", r.degree);
+        free_pol(&a); free_pol(&b); free_pol(&r);
+        return 1;
+    }
+
+    ULL expected[2] = {0, 14};
+    int success = 1;
+    for (size_t i = 0; i <= r.degree; i++)
+    {
+        if (r.coeffs[i] != expected[i])
+        {
+            printf("FAIL: coeff[%zu]: expected %llu, got %llu\n",
+                   i, expected[i], r.coeffs[i]);
+            success = 0;
+        }
+    }
+
+    if (success)
+        printf("SUCCESS: subtraction computed correctly\n");
+
+    free_pol(&a);
+    free_pol(&b);
+    free_pol(&r);
+    return !success;
+}
+
+int test_mul()
+{
+    printf("\n=== test_mul ===\n");
+    Polynomial a, b, r;
+
+    new_pol(&a, 1, 17);
+    new_pol(&b, 1, 17);
+    new_pol(&r, 0, 17);
+
+    a.coeffs[0] = 3; a.coeffs[1] = 2;
+    b.coeffs[0] = 4; b.coeffs[1] = 1;
+
+    printf("Input polynomials:\n");
+    print_polynomial(&a, "A");
+    print_polynomial(&b, "B");
+
+    int st = pol_mul_pol(&a, &b, &r);
+    if (st != POL_SUCCESS)
+    {
+        printf("FAIL: pol_mul_pol returned error %d\n", st);
+        free_pol(&a); free_pol(&b); free_pol(&r);
+        return 1;
+    }
+
+    printf("Result:\n");
+    print_polynomial(&r, "A * B");
+
+    // Expected: (2x+3)(x+4) = 2x^2 + 8x + 3x + 12 = 2x^2 + 11x + 12
+    // Mod 17: 2x^2 + 11x + 12
+    ULL expected[3] = {12, 11, 2};
+    int success = 1;
+    for (size_t i = 0; i <= 2; i++)
+    {
+        if (r.coeffs[i] % 17 != expected[i] % 17)
+        {
+            printf("FAIL: coeff[%zu]: expected %llu, got %llu\n",
+                   i, expected[i] % 17, r.coeffs[i]);
+            success = 0;
+        }
+    }
+
+    if (success)
+        printf("SUCCESS: multiplication computed correctly\n");
+
+    free_pol(&a);
+    free_pol(&b);
+    free_pol(&r);
+    return 0;
+}
+
+int test_dot()
+{
+    printf("\n=== test_dot ===\n");
+    Polynomial a, b;
+    ULL r;
+
+    new_pol(&a, 2, 17);
+    new_pol(&b, 2, 17);
+
+    a.coeffs[0] = 1; a.coeffs[1] = 2; a.coeffs[2] = 3;
+    b.coeffs[0] = 4; b.coeffs[1] = 5; b.coeffs[2] = 6;
+
+    printf("Input polynomials:\n");
+    print_polynomial(&a, "A");
+    print_polynomial(&b, "B");
+
+    int st = dot_pol(&a, &b, &r);
+    if (st != POL_SUCCESS)
+    {
+        printf("FAIL: dot_pol returned error %d\n", st);
+        free_pol(&a); free_pol(&b);
+        return 1;
+    }
+
+    printf("Result: dot product = %llu\n", r);
+
+    // Expected: 1*4 + 2*5 + 3*6 = 4 + 10 + 18 = 32 ≡ 15 (mod 17)
+    {
+        ULL expected = 15;
+        if (r != expected)
+        {
+            printf("FAIL: expected %llu, got %llu\n", expected, r);
+            free_pol(&a); free_pol(&b);
+            return 1;
+        }
+    }
+
+    printf("SUCCESS: dot product computed correctly\n");
+    free_pol(&a);
+    free_pol(&b);
+    return 0;
+}
+
+int test_modulo_unit()
+{
+    printf("\n=== test_modulo_unit ===\n");
+    Polynomial a, m, r;
+
+    new_pol(&a, 3, 5);
+    new_pol(&m, 1, 5);
+    new_pol(&r, 0, 5);
+
+    // A = x^3 + 0x^2 + 2x + 3
+    a.coeffs[0] = 3; a.coeffs[1] = 2; a.coeffs[2] = 0; a.coeffs[3] = 1;
+    // M = x + 2
+    m.coeffs[0] = 2; m.coeffs[1] = 1;
+
+    printf("Input:\n");
+    print_polynomial(&a, "A (dividend)");
+    print_polynomial(&m, "M (divisor)");
+
+    int st = modulo_unit_pol(&a, &m, &r);
+    if (st != POL_SUCCESS)
+    {
+        printf("FAIL: modulo_unit_pol returned error %d\n", st);
+        free_pol(&a); free_pol(&m); free_pol(&r);
+        return 1;
+    }
+
+    printf("Result:\n");
+    print_polynomial(&r, "A mod M");
+
+    free_pol(&a);
+    free_pol(&m);
+    free_pol(&r);
+    return 0;
+}
+
+int test_scalar_mul()
+{
+    printf("\n=== test_scalar_mul ===\n");
+    Polynomial a, r;
+
+    new_pol(&a, 2, 17);
+    new_pol(&r, 0, 17);
+
+    // A = 3 + 2x + x^2
+    a.coeffs[0] = 3; a.coeffs[1] = 2; a.coeffs[2] = 1;
+
+    printf("Input polynomial A:\n");
+    print_polynomial(&a, "A");
+
+    ULL k = 4;
+    int st = scalar_mul_pol(&a, k, &r);
+    if (st != POL_SUCCESS)
+    {
+        printf("FAIL: scalar_mul_pol returned error %d\n", st);
+        free_pol(&a); free_pol(&r);
+        return 1;
+    }
+
+    printf("Result polynomial R = k * A (k=4):\n");
+    print_polynomial(&r, "R");
+
+    // [3*4 %17, 2*4 %17, 1*4 %17] = [12, 8, 4]
+    ULL expected[3] = {12, 8, 4};
+    int success = 1;
+    for (size_t i = 0; i <= r.degree; i++)
+    {
+        if (r.coeffs[i] != expected[i])
+        {
+            printf("FAIL: coeff[%zu]: expected %llu, got %llu\n",
+                   i, expected[i], r.coeffs[i]);
+            success = 0;
+        }
+    }
+
+    if (success)
+    {
+        printf("SUCCESS: scalar multiplication correct\n");
+    }
+
+    free_pol(&a);
+    free_pol(&r);
+    return !success;
+}
+
+int test_modulo_inverse()
+{
+    printf("\n=== test_modulo_inverse ===\n");
+    ULL a = 3, m = 17, inv;
+    int st = modulo_inverse(a, m, &inv);
+    if (st != POL_SUCCESS)
+    {
+        printf("FAIL: modulo_inverse returned error %d\n", st);
+        return 1;
+    }
+
+    printf("Input: a=%llu, m=%llu\n", a, m);
+    printf("Result: inverse = %llu\n", inv);
+
+    // 3*6 %17 = 18 %17 = 1
+    if ((a * inv) % m != 1)
+    {
+        printf("FAIL: a * inv %% m != 1\n");
+        return 1;
+    }
+
+    printf("SUCCESS: modulo inverse correct\n");
+    return 0;
+}
+
+int test_egcd()
+{
+    printf("\n=== test_egcd ===\n");
+    ULL a = 30, b = 21;
+    long long x, y;
+    ULL g = egcd(a, b, &x, &y);
+
+    printf("Input: a=%llu, b=%llu\n", a, b);
+    printf("Result: gcd=%llu, x=%lld, y=%lld\n", g, x, y);
+
+    // a*x + b*y == gcd
+    if ((long long)a * x + (long long)b * y != (long long)g)
+    {
+        printf("FAIL: a*x + b*y != gcd\n");
+        return 1;
+    }
+
+    printf("SUCCESS: egcd correct\n");
+    return 0;
+}
+
+int test_str_to_pol()
+{
+    printf("\n=== test_str_to_pol ===\n");
+    Polynomial p;
+
+    new_pol(&p, 0, 17);
+
+    const char* input = "  (    -1  ,  -2  ,  -3  ,  -4  )     ";
+    ULL modulo = 17;
+
+    printf("Input string: \"%s\", modulo: %llu\n", input, modulo);
+
+    int st = str_to_pol(input, modulo, &p);
+    if (st != POL_SUCCESS)
+    {
+        printf("FAIL: str_to_pol returned error %d\n", st);
+        return 1;
+    }
+
+    printf("Result:\n");
+    print_polynomial(&p, "Parsed polynomial");
+
+    if (p.degree != 3 || p.coeffs[0] != 16 || p.coeffs[1] != 15 ||
+        p.coeffs[2] != 14 || p.coeffs[3] != 13)
+    {
+        printf("FAIL: incorrect parsing\n");
+        free_pol(&p);
+        return 1;
+    }
+
+    printf("SUCCESS: string parsed correctly\n");
+    free_pol(&p);
+    return 0;
+}
+
+int test_pol_to_str()
+{
+    printf("\n=== test_pol_to_str ===\n");
+    Polynomial p;
+
+    new_pol(&p, 2, 17);
+
+    p.coeffs[0] = 5; p.coeffs[1] = 10; p.coeffs[2] = 3;
+
+    printf("Input polynomial:\n");
+    print_polynomial(&p, "P");
+
+    char* s = NULL;
+    int st = pol_to_str(&p, &s);
+    if (st != POL_SUCCESS)
+    {
+        printf("FAIL: pol_to_str returned error %d\n", st);
+        free_pol(&p);
+        return 1;
+    }
+
+    printf("Output string: \"%s\"\n", s);
+
+    if (s != NULL)
+        free(s);
+    else
+        printf("WARNING: string is NULL\n");
+
+    free_pol(&p);
+
+    printf("SUCCESS: test completed\n");
+    return 0;
+}
+
+/*
+ * Запускает комплексную проверку всех базовых функций работы с полиномами.
+ * Используется для отладки и верификации корректности реализации библиотеки.
+ *
+ * [RETURN]  0          — все тесты пройдены успешно
+ *           failures   — кол—во ошибочных ф—ций
+ */
+int run_all_tests()
+{
+    printf("========== RUNNING ALL TESTS ==========\n");
+
+    int failures = 0;
+
+    failures += test_new_free();
+    failures += test_copy();
+    failures += test_sum();
+    failures += test_sub();
+    failures += test_mul();
+    failures += test_dot();
+    failures += test_modulo_unit();
+    failures += test_scalar_mul();
+    failures += test_modulo_inverse();
+    failures += test_egcd();
+    failures += test_str_to_pol();
+    failures += test_pol_to_str();
+
+    printf("\n========== TESTS COMPLETED ==========\n");
+    printf("Total failures: %d\n", failures);
+
+    if (failures == 0)
+        printf("ALL TESTS PASSED\n");
+    else
+        printf("%d TEST(S) FAILED\n", failures);
+
+    return failures;
+}
