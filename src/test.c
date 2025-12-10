@@ -1,10 +1,33 @@
 #include "../include/test.h"
+#include "../include/mem_tracker.h"
 
 #define MAX_INPUT_LEN 1024
 
 size_t maxMemory = 0;
 size_t currentMemory = 0;
 
+ULL rand64()
+{
+    return ((ULL)(rand() & 0xFFFF) << 48) |
+           ((ULL)(rand() & 0xFFFF) << 32) |
+           ((ULL)(rand() & 0xFFFF) << 16) |
+           ((ULL)(rand() & 0xFFFF));
+}
+
+int get_rand_pol(Polynomial* P, size_t degree, ULL modulo)
+{
+    if (P == NULL)
+        return POL_NULL_PTR;
+
+    normalize_pol(P);
+    return POL_SUCCESS;
+}
+
+size_t pol_bytes(const Polynomial* P)
+{
+    if (!P || !P->coeffs) return 0;
+    return (P->degree + 1) * sizeof(ULL);
+}
 
 int manual_test()
 {
@@ -213,11 +236,6 @@ int manual_test()
     }
 }
 
-int auto_test()
-{
-    return 0;
-}
-
 int input_test()
 {
     char buffer[MAX_INPUT_LEN];
@@ -309,7 +327,8 @@ int input_test()
         return TEST_UNKNOWN_ERROR;
 
     char* str_result = NULL;
-    status = pol_to_str(&R, &str_result);
+    size_t str_size = 0;
+    status = pol_to_str(&R, &str_result, &str_size);
     if (status != POL_SUCCESS)
     {
         free_pol(&R);
@@ -318,8 +337,121 @@ int input_test()
 
     printf("Result: %s\n", str_result);
 
-    free(str_result);
+    free(str_result, str_size);
     free_pol(&R);
 
     return TEST_SUCCESS;
+}
+
+int auto_test()
+{
+    // srand((unsigned)time(NULL));
+    srand(1);
+
+    int test_variant;
+    printf("Choose test variant (1 = fix C vs M, 2 = fix degree of divisor M): ");
+    if (scanf("%d", &test_variant) != 1 || (test_variant != 1 && test_variant != 2))
+        return TEST_INVALID_ARG;
+    while (getchar() != '\n')
+    {;}
+
+    size_t deg_A, deg_B, deg_M;
+    ULL modulo;
+
+    printf("Enter modulo (>1):\n");
+    if (scanf("%llu", &modulo) != 1 || modulo <= 1)
+        return TEST_INVALID_MODULO;
+
+    if (test_variant == 1)
+    {
+        printf("Enter degree for A:\n");
+        if (scanf("%zu", &deg_A) != 1)
+            return TEST_INVALID_ARG;
+        while (getchar() != '\n')
+        {;}
+
+        printf("Enter degree for B:\n");
+        if (scanf("%zu", &deg_B) != 1)
+            return TEST_INVALID_ARG;
+        while (getchar() != '\n')
+        {;}
+
+        printf("Enter degree for M:\n");
+        if (scanf("%zu", &deg_M) != 1)
+            return TEST_INVALID_ARG;
+        while (getchar() != '\n')
+        {;}
+    }
+    else if (test_variant == 2)
+    {
+        printf("Enter degree for divisor M:\n");
+        if (scanf("%zu", &deg_M) != 1)
+            return TEST_INVALID_ARG;
+        while (getchar() != '\n')
+        {;}
+
+        printf("Enter degree for A:\n");
+        if (scanf("%zu", &deg_A) != 1)
+            return TEST_INVALID_ARG;
+        while (getchar() != '\n')
+        {;}
+
+        printf("Enter degree for B (less than or equal M): ");
+        if (scanf("%zu", &deg_B) != 1 || deg_B > deg_M) deg_B = deg_M;
+        while (getchar() != '\n')
+        {;}
+    }
+    else
+    {
+        printf("Invalid test variant.\n");
+        return TEST_INVALID_ARG;
+    }
+
+    Polynomial A, B, M, R;
+    new_pol(&A, deg_A, modulo);
+    new_pol(&B, deg_B, modulo);
+    new_pol(&M, deg_M, modulo);
+    new_pol(&R, deg_A + deg_B, modulo);
+
+    get_rand_pol(&A, deg_A, modulo);
+    get_rand_pol(&B, deg_B, modulo);
+    get_rand_pol(&M, deg_M, modulo);
+
+    // Сохраняем начальные значения памяти
+    size_t mem_before = g_current_allocated;
+
+    int status = pol_mul_mod_unit(&A, &B, &M, &R);
+    if (status != POL_SUCCESS)
+    {
+        printf("Error in pol_mul_mod_unit: %d\n", status);
+        free_pol(&A); free_pol(&B); free_pol(&M); free_pol(&R);
+        return status;
+    }
+
+    size_t mem_after = g_current_allocated;
+
+    size_t bytes_A = pol_bytes(&A);
+    size_t bytes_B = pol_bytes(&B);
+    size_t bytes_M = pol_bytes(&M);
+    size_t bytes_R = pol_bytes(&R);
+
+    // Консольный вывод
+    printf("degA=%zu, degB=%zu, degM=%zu, degR=%zu, bytesA=%zu, bytesB=%zu, bytesM=%zu, bytesR=%zu, mem_delta=%zu\n",
+           A.degree, B.degree, M.degree, R.degree,
+           bytes_A, bytes_B, bytes_M, bytes_R,
+           mem_after - mem_before);
+
+    // CSV вывод
+    FILE* f = fopen("result.csv", "a");
+    if (f)
+    {
+        fprintf(f, "%zu,%zu,%zu,%zu,%zu,%zu,%zu,%zu,%zu\n",
+                A.degree, B.degree, M.degree, R.degree,
+                bytes_A, bytes_B, bytes_M, bytes_R,
+                mem_after - mem_before);
+        fclose(f);
+    }
+
+    free_pol(&A); free_pol(&B); free_pol(&M); free_pol(&R);
+    return 0;
 }

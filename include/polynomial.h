@@ -6,6 +6,8 @@
 #include <limits.h>  // LLONG_MAX
 #include <stdio.h>   // printf
 #include <string.h> // strcspn
+#include <time.h> // random generator
+
 
 typedef unsigned long long ULL;
 

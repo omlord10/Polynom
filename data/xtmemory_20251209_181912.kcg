@@ -1,0 +1,1696 @@
+# callgrind format
+version: 1
+creator: xtree-1
+pid: 22245
+cmd: ./lab3
+
+positions: line
+event: curB : currently allocated Bytes
+event: curBk : currently allocated Blocks
+event: totB : total allocated Bytes
+event: totBk : total allocated Blocks
+event: totFdB : total Freed Bytes
+event: totFdBk : total Freed Blocks
+events: curB  curBk  totB  totBk  totFdB  totFdBk 
+fl=(1) /home/yama/documents/leti/AiSD/lab3/main.c
+fn=(1) main
+5
+cfi=(2) /home/yama/documents/leti/AiSD/lab3/src/test.c
+cfn=(2) manual_test
+calls=0 11
+5 0 0 1024 1 0 0
+fl=(2)
+fn=(2)
+11
+cfi=(3) ./libio/./libio/ioputs.c
+cfn=(3) puts
+calls=0 40
+11 0 0 1024 1 0 0
+fl=(3)
+fn=(3)
+40
+cfi=(4) ./libio/./libio/fileops.c
+cfn=(4) _IO_file_xsputn@@GLIBC_2.2.5
+calls=0 1244
+40 0 0 1024 1 0 0
+fl=(4)
+fn=(4)
+1244
+cfi=(4)
+cfn=(5) _IO_file_overflow@@GLIBC_2.2.5
+calls=0 745
+1244 0 0 1024 1 0 0
+fl=(4)
+fn=(5)
+745
+cfi=(5) ./libio/./libio/genops.c
+cfn=(6) _IO_doallocbuf
+calls=0 347
+745 0 0 1024 1 0 0
+fl=(5)
+fn=(6)
+347
+cfi=(6) ./libio/./libio/filedoalloc.c
+cfn=(7) _IO_file_doallocate
+calls=0 101
+347 0 0 1024 1 0 0
+fl=(6)
+fn=(7)
+101 0 0 1024 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 16
+5 0 0 8 1 0 0
+fl=(2)
+fn=(2)
+16
+cfi=(7) /home/yama/documents/leti/AiSD/lab3/src/polynomial.c
+cfn=(8) new_pol
+calls=0 109
+16 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 23
+5 0 0 24 1 0 0
+fl=(2)
+fn=(2)
+23
+cfi=(7)
+cfn=(8)
+calls=0 109
+23 0 0 24 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 24 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 26
+5 0 0 16 1 0 0
+fl=(2)
+fn=(2)
+26
+cfi=(7)
+cfn=(8)
+calls=0 109
+26 0 0 16 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 16 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 29
+5 0 0 24 1 0 0
+fl=(2)
+fn=(2)
+29
+cfi=(7)
+cfn=(8)
+calls=0 109
+29 0 0 24 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 24 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 34
+5 0 0 16 1 0 0
+fl=(2)
+fn=(2)
+34
+cfi=(7)
+cfn=(8)
+calls=0 109
+34 0 0 16 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 16 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 37
+5 0 0 32 1 0 0
+fl=(2)
+fn=(2)
+37
+cfi=(7)
+cfn=(9) pol_mul_mod_unit
+calls=0 433
+37 0 0 32 1 0 0
+fl=(7)
+fn=(9)
+433
+cfi=(7)
+cfn=(8)
+calls=0 109
+433 0 0 32 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 32 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 37
+5 0 0 32 1 0 0
+fl=(2)
+fn=(2)
+37
+cfi=(7)
+cfn=(9)
+calls=0 435
+37 0 0 32 1 0 0
+fl=(7)
+fn=(9)
+435
+cfi=(7)
+cfn=(10) pol_mul_pol
+calls=0 329
+435 0 0 32 1 0 0
+fl=(7)
+fn=(10)
+329 0 0 32 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 37
+5 0 0 0 0 32 1
+fl=(2)
+fn=(2)
+37
+cfi=(7)
+cfn=(9)
+calls=0 435
+37 0 0 0 0 32 1
+fl=(7)
+fn=(9)
+435
+cfi=(7)
+cfn=(10)
+calls=0 353
+435 0 0 0 0 32 1
+fl=(7)
+fn=(10)
+353 0 0 0 0 32 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 37
+5 0 0 32 1 0 0
+fl=(2)
+fn=(2)
+37
+cfi=(7)
+cfn=(9)
+calls=0 441
+37 0 0 32 1 0 0
+fl=(7)
+fn=(9)
+441
+cfi=(7)
+cfn=(11) modulo_unit_pol
+calls=0 378
+441 0 0 32 1 0 0
+fl=(7)
+fn=(11)
+378
+cfi=(7)
+cfn=(12) realloc_coeffs
+calls=0 9
+378 0 0 32 1 0 0
+fl=(7)
+fn=(12)
+9 0 0 32 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 37
+5 0 0 0 0 8 1
+fl=(2)
+fn=(2)
+37
+cfi=(7)
+cfn=(9)
+calls=0 441
+37 0 0 0 0 8 1
+fl=(7)
+fn=(9)
+441
+cfi=(7)
+cfn=(11)
+calls=0 378
+441 0 0 0 0 8 1
+fl=(7)
+fn=(11)
+378
+cfi=(7)
+cfn=(12)
+calls=0 14
+378 0 0 0 0 8 1
+fl=(7)
+fn=(12)
+14 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 37
+5 0 0 0 0 32 1
+fl=(2)
+fn=(2)
+37
+cfi=(7)
+cfn=(9)
+calls=0 443
+37 0 0 0 0 32 1
+fl=(7)
+fn=(9)
+443
+cfi=(7)
+cfn=(13) free_pol
+calls=0 129
+443 0 0 0 0 32 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 32 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 59
+5 0 0 0 0 24 1
+fl=(2)
+fn=(2)
+59
+cfi=(7)
+cfn=(13)
+calls=0 129
+59 0 0 0 0 24 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 24 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 59
+5 0 0 0 0 16 1
+fl=(2)
+fn=(2)
+59
+cfi=(7)
+cfn=(13)
+calls=0 129
+59 0 0 0 0 16 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 16 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 59
+5 0 0 0 0 24 1
+fl=(2)
+fn=(2)
+59
+cfi=(7)
+cfn=(13)
+calls=0 129
+59 0 0 0 0 24 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 24 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 59
+5 0 0 0 0 16 1
+fl=(2)
+fn=(2)
+59
+cfi=(7)
+cfn=(13)
+calls=0 129
+59 0 0 0 0 16 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 16 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 69
+5 0 0 8 1 0 0
+fl=(2)
+fn=(2)
+69
+cfi=(7)
+cfn=(8)
+calls=0 109
+69 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 72
+5 0 0 24 1 0 0
+fl=(2)
+fn=(2)
+72
+cfi=(7)
+cfn=(8)
+calls=0 109
+72 0 0 24 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 24 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 75
+5 0 0 24 1 0 0
+fl=(2)
+fn=(2)
+75
+cfi=(7)
+cfn=(8)
+calls=0 109
+75 0 0 24 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 24 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 78
+5 0 0 24 1 0 0
+fl=(2)
+fn=(2)
+78
+cfi=(7)
+cfn=(9)
+calls=0 433
+78 0 0 24 1 0 0
+fl=(7)
+fn=(9)
+433
+cfi=(7)
+cfn=(8)
+calls=0 109
+433 0 0 24 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 24 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 78
+5 0 0 0 0 24 1
+fl=(2)
+fn=(2)
+78
+cfi=(7)
+cfn=(9)
+calls=0 443
+78 0 0 0 0 24 1
+fl=(7)
+fn=(9)
+443
+cfi=(7)
+cfn=(13)
+calls=0 129
+443 0 0 0 0 24 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 24 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 96
+5 0 0 0 0 8 1
+fl=(2)
+fn=(2)
+96
+cfi=(7)
+cfn=(13)
+calls=0 129
+96 0 0 0 0 8 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 96
+5 0 0 0 0 24 1
+fl=(2)
+fn=(2)
+96
+cfi=(7)
+cfn=(13)
+calls=0 129
+96 0 0 0 0 24 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 24 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 96
+5 0 0 0 0 24 1
+fl=(2)
+fn=(2)
+96
+cfi=(7)
+cfn=(13)
+calls=0 129
+96 0 0 0 0 24 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 24 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 106
+5 0 0 16 1 0 0
+fl=(2)
+fn=(2)
+106
+cfi=(7)
+cfn=(8)
+calls=0 109
+106 0 0 16 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 16 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 109
+5 0 0 16 1 0 0
+fl=(2)
+fn=(2)
+109
+cfi=(7)
+cfn=(8)
+calls=0 109
+109 0 0 16 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 16 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 112
+5 0 0 8 1 0 0
+fl=(2)
+fn=(2)
+112
+cfi=(7)
+cfn=(8)
+calls=0 109
+112 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 115
+5 0 0 24 1 0 0
+fl=(2)
+fn=(2)
+115
+cfi=(7)
+cfn=(9)
+calls=0 433
+115 0 0 24 1 0 0
+fl=(7)
+fn=(9)
+433
+cfi=(7)
+cfn=(8)
+calls=0 109
+433 0 0 24 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 24 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 115
+5 0 0 24 1 0 0
+fl=(2)
+fn=(2)
+115
+cfi=(7)
+cfn=(9)
+calls=0 435
+115 0 0 24 1 0 0
+fl=(7)
+fn=(9)
+435
+cfi=(7)
+cfn=(10)
+calls=0 329
+435 0 0 24 1 0 0
+fl=(7)
+fn=(10)
+329 0 0 24 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 115
+5 0 0 0 0 24 1
+fl=(2)
+fn=(2)
+115
+cfi=(7)
+cfn=(9)
+calls=0 435
+115 0 0 0 0 24 1
+fl=(7)
+fn=(9)
+435
+cfi=(7)
+cfn=(10)
+calls=0 353
+435 0 0 0 0 24 1
+fl=(7)
+fn=(10)
+353 0 0 0 0 24 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 115
+5 0 0 24 1 0 0
+fl=(2)
+fn=(2)
+115
+cfi=(7)
+cfn=(9)
+calls=0 441
+115 0 0 24 1 0 0
+fl=(7)
+fn=(9)
+441
+cfi=(7)
+cfn=(11)
+calls=0 378
+441 0 0 24 1 0 0
+fl=(7)
+fn=(11)
+378
+cfi=(7)
+cfn=(12)
+calls=0 9
+378 0 0 24 1 0 0
+fl=(7)
+fn=(12)
+9 0 0 24 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 115
+5 0 0 0 0 32 1
+fl=(2)
+fn=(2)
+115
+cfi=(7)
+cfn=(9)
+calls=0 441
+115 0 0 0 0 32 1
+fl=(7)
+fn=(9)
+441
+cfi=(7)
+cfn=(11)
+calls=0 378
+441 0 0 0 0 32 1
+fl=(7)
+fn=(11)
+378
+cfi=(7)
+cfn=(12)
+calls=0 14
+378 0 0 0 0 32 1
+fl=(7)
+fn=(12)
+14 0 0 0 0 32 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 115
+5 0 0 0 0 24 1
+fl=(2)
+fn=(2)
+115
+cfi=(7)
+cfn=(9)
+calls=0 443
+115 0 0 0 0 24 1
+fl=(7)
+fn=(9)
+443
+cfi=(7)
+cfn=(13)
+calls=0 129
+443 0 0 0 0 24 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 24 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 133
+5 0 0 0 0 16 1
+fl=(2)
+fn=(2)
+133
+cfi=(7)
+cfn=(13)
+calls=0 129
+133 0 0 0 0 16 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 16 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 133
+5 0 0 0 0 16 1
+fl=(2)
+fn=(2)
+133
+cfi=(7)
+cfn=(13)
+calls=0 129
+133 0 0 0 0 16 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 16 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 133
+5 0 0 0 0 8 1
+fl=(2)
+fn=(2)
+133
+cfi=(7)
+cfn=(13)
+calls=0 129
+133 0 0 0 0 8 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 143
+5 0 0 8 1 0 0
+fl=(2)
+fn=(2)
+143
+cfi=(7)
+cfn=(8)
+calls=0 109
+143 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 146
+5 0 0 8 1 0 0
+fl=(2)
+fn=(2)
+146
+cfi=(7)
+cfn=(8)
+calls=0 109
+146 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 149
+5 0 0 16 1 0 0
+fl=(2)
+fn=(2)
+149
+cfi=(7)
+cfn=(8)
+calls=0 109
+149 0 0 16 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 16 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 165
+5 0 0 0 0 8 1
+fl=(2)
+fn=(2)
+165
+cfi=(7)
+cfn=(13)
+calls=0 129
+165 0 0 0 0 8 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 165
+5 0 0 0 0 8 1
+fl=(2)
+fn=(2)
+165
+cfi=(7)
+cfn=(13)
+calls=0 129
+165 0 0 0 0 8 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 165
+5 0 0 0 0 16 1
+fl=(2)
+fn=(2)
+165
+cfi=(7)
+cfn=(13)
+calls=0 129
+165 0 0 0 0 16 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 16 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 175
+5 0 0 8 1 0 0
+fl=(2)
+fn=(2)
+175
+cfi=(7)
+cfn=(8)
+calls=0 109
+175 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 178
+5 0 0 8 1 0 0
+fl=(2)
+fn=(2)
+178
+cfi=(7)
+cfn=(8)
+calls=0 109
+178 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 181
+5 0 0 8 1 0 0
+fl=(2)
+fn=(2)
+181
+cfi=(7)
+cfn=(8)
+calls=0 109
+181 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 200
+5 0 0 0 0 8 1
+fl=(2)
+fn=(2)
+200
+cfi=(7)
+cfn=(13)
+calls=0 129
+200 0 0 0 0 8 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 200
+5 0 0 0 0 8 1
+fl=(2)
+fn=(2)
+200
+cfi=(7)
+cfn=(13)
+calls=0 129
+200 0 0 0 0 8 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 200
+5 0 0 0 0 8 1
+fl=(2)
+fn=(2)
+200
+cfi=(7)
+cfn=(13)
+calls=0 129
+200 0 0 0 0 8 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+5
+cfi=(2)
+cfn=(2)
+calls=0 202
+5 0 0 0 0 24 1
+fl=(2)
+fn=(2)
+202
+cfi=(7)
+cfn=(13)
+calls=0 129
+202 0 0 0 0 24 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 24 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14) input_test
+calls=0 227
+8 0 0 1024 1 0 0
+fl=(2)
+fn=(14)
+227
+cfi=(8) ./stdio-common/./stdio-common/isoc99_scanf.c
+cfn=(15) __isoc99_scanf
+calls=0 30
+227 0 0 1024 1 0 0
+fl=(8)
+fn=(15)
+30
+cfi=(9) ./stdio-common/./stdio-common/vfscanf-internal.c
+cfn=(16) __vfscanf_internal
+calls=0 676
+30 0 0 1024 1 0 0
+fl=(9)
+fn=(16)
+676
+cfi=(5)
+cfn=(17) _IO_default_uflow
+calls=0 362
+676 0 0 1024 1 0 0
+fl=(5)
+fn=(17)
+362
+cfi=(4)
+cfn=(18) _IO_file_underflow@@GLIBC_2.2.5
+calls=0 486
+362 0 0 1024 1 0 0
+fl=(4)
+fn=(18)
+486
+cfi=(5)
+cfn=(6)
+calls=0 347
+486 0 0 1024 1 0 0
+fl=(5)
+fn=(6)
+347
+cfi=(6)
+cfn=(7)
+calls=0 101
+347 0 0 1024 1 0 0
+fl=(6)
+fn=(7)
+101 0 0 1024 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 236
+8 0 0 8 1 0 0
+fl=(2)
+fn=(14)
+236
+cfi=(7)
+cfn=(8)
+calls=0 109
+236 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 237
+8 0 0 8 1 0 0
+fl=(2)
+fn=(14)
+237
+cfi=(7)
+cfn=(8)
+calls=0 109
+237 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 238
+8 0 0 8 1 0 0
+fl=(2)
+fn=(14)
+238
+cfi=(7)
+cfn=(8)
+calls=0 109
+238 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 239
+8 0 0 8 1 0 0
+fl=(2)
+fn=(14)
+239
+cfi=(7)
+cfn=(8)
+calls=0 109
+239 0 0 8 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 248
+8 0 0 0 0 8 1
+fl=(2)
+fn=(14)
+248
+cfi=(10) /home/yama/documents/leti/AiSD/lab3/src/string_utils.c
+cfn=(19) str_to_pol
+calls=0 10
+248 0 0 0 0 8 1
+fl=(10)
+fn=(19)
+10 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 248
+8 0 0 40 1 0 0
+fl=(2)
+fn=(14)
+248
+cfi=(10)
+cfn=(19)
+calls=0 28
+248 0 0 40 1 0 0
+fl=(10)
+fn=(19)
+28 0 0 40 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 248
+8 0 0 40 1 0 0
+fl=(2)
+fn=(14)
+248
+cfi=(10)
+cfn=(19)
+calls=0 90
+248 0 0 40 1 0 0
+fl=(10)
+fn=(19)
+90 0 0 40 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 248
+8 0 0 0 0 40 1
+fl=(2)
+fn=(14)
+248
+cfi=(10)
+cfn=(19)
+calls=0 100
+248 0 0 0 0 40 1
+fl=(10)
+fn=(19)
+100 0 0 0 0 40 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 262
+8 0 0 0 0 8 1
+fl=(2)
+fn=(14)
+262
+cfi=(10)
+cfn=(19)
+calls=0 10
+262 0 0 0 0 8 1
+fl=(10)
+fn=(19)
+10 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 262
+8 0 0 24 1 0 0
+fl=(2)
+fn=(14)
+262
+cfi=(10)
+cfn=(19)
+calls=0 28
+262 0 0 24 1 0 0
+fl=(10)
+fn=(19)
+28 0 0 24 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 262
+8 0 0 24 1 0 0
+fl=(2)
+fn=(14)
+262
+cfi=(10)
+cfn=(19)
+calls=0 90
+262 0 0 24 1 0 0
+fl=(10)
+fn=(19)
+90 0 0 24 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 262
+8 0 0 0 0 24 1
+fl=(2)
+fn=(14)
+262
+cfi=(10)
+cfn=(19)
+calls=0 100
+262 0 0 0 0 24 1
+fl=(10)
+fn=(19)
+100 0 0 0 0 24 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 278
+8 0 0 0 0 8 1
+fl=(2)
+fn=(14)
+278
+cfi=(10)
+cfn=(19)
+calls=0 10
+278 0 0 0 0 8 1
+fl=(10)
+fn=(19)
+10 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 278
+8 0 0 8 1 0 0
+fl=(2)
+fn=(14)
+278
+cfi=(10)
+cfn=(19)
+calls=0 28
+278 0 0 8 1 0 0
+fl=(10)
+fn=(19)
+28 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 278
+8 0 0 8 1 0 0
+fl=(2)
+fn=(14)
+278
+cfi=(10)
+cfn=(19)
+calls=0 90
+278 0 0 8 1 0 0
+fl=(10)
+fn=(19)
+90 0 0 8 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 278
+8 0 0 0 0 8 1
+fl=(2)
+fn=(14)
+278
+cfi=(10)
+cfn=(19)
+calls=0 100
+278 0 0 0 0 8 1
+fl=(10)
+fn=(19)
+100 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 302
+8 0 0 56 1 0 0
+fl=(2)
+fn=(14)
+302
+cfi=(7)
+cfn=(9)
+calls=0 433
+302 0 0 56 1 0 0
+fl=(7)
+fn=(9)
+433
+cfi=(7)
+cfn=(8)
+calls=0 109
+433 0 0 56 1 0 0
+fl=(7)
+fn=(8)
+109 0 0 56 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 302
+8 0 0 56 1 0 0
+fl=(2)
+fn=(14)
+302
+cfi=(7)
+cfn=(9)
+calls=0 435
+302 0 0 56 1 0 0
+fl=(7)
+fn=(9)
+435
+cfi=(7)
+cfn=(10)
+calls=0 329
+435 0 0 56 1 0 0
+fl=(7)
+fn=(10)
+329 0 0 56 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 302
+8 0 0 0 0 56 1
+fl=(2)
+fn=(14)
+302
+cfi=(7)
+cfn=(9)
+calls=0 435
+302 0 0 0 0 56 1
+fl=(7)
+fn=(9)
+435
+cfi=(7)
+cfn=(10)
+calls=0 353
+435 0 0 0 0 56 1
+fl=(7)
+fn=(10)
+353 0 0 0 0 56 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 302
+8 0 0 56 1 0 0
+fl=(2)
+fn=(14)
+302
+cfi=(7)
+cfn=(9)
+calls=0 441
+302 0 0 56 1 0 0
+fl=(7)
+fn=(9)
+441
+cfi=(7)
+cfn=(11)
+calls=0 378
+441 0 0 56 1 0 0
+fl=(7)
+fn=(11)
+378
+cfi=(7)
+cfn=(12)
+calls=0 9
+378 0 0 56 1 0 0
+fl=(7)
+fn=(12)
+9 0 0 56 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 302
+8 0 0 0 0 8 1
+fl=(2)
+fn=(14)
+302
+cfi=(7)
+cfn=(9)
+calls=0 441
+302 0 0 0 0 8 1
+fl=(7)
+fn=(9)
+441
+cfi=(7)
+cfn=(11)
+calls=0 378
+441 0 0 0 0 8 1
+fl=(7)
+fn=(11)
+378
+cfi=(7)
+cfn=(12)
+calls=0 14
+378 0 0 0 0 8 1
+fl=(7)
+fn=(12)
+14 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 302
+8 0 0 0 0 56 1
+fl=(2)
+fn=(14)
+302
+cfi=(7)
+cfn=(9)
+calls=0 443
+302 0 0 0 0 56 1
+fl=(7)
+fn=(9)
+443
+cfi=(7)
+cfn=(13)
+calls=0 129
+443 0 0 0 0 56 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 56 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 304
+8 0 0 0 0 40 1
+fl=(2)
+fn=(14)
+304
+cfi=(7)
+cfn=(13)
+calls=0 129
+304 0 0 0 0 40 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 40 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 305
+8 0 0 0 0 24 1
+fl=(2)
+fn=(14)
+305
+cfi=(7)
+cfn=(13)
+calls=0 129
+305 0 0 0 0 24 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 24 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 306
+8 0 0 0 0 8 1
+fl=(2)
+fn=(14)
+306
+cfi=(7)
+cfn=(13)
+calls=0 129
+306 0 0 0 0 8 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 8 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 312
+8 0 0 4 1 0 0
+fl=(2)
+fn=(14)
+312
+cfi=(10)
+cfn=(20) pol_to_str
+calls=0 128
+312 0 0 4 1 0 0
+fl=(10)
+fn=(20)
+128 0 0 4 1 0 0
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 321
+8 0 0 0 0 4 1
+fl=(2)
+fn=(14)
+321 0 0 0 0 4 1
+
+fl=(1)
+fn=(1)
+8
+cfi=(2)
+cfn=(14)
+calls=0 322
+8 0 0 0 0 56 1
+fl=(2)
+fn=(14)
+322
+cfi=(7)
+cfn=(13)
+calls=0 129
+322 0 0 0 0 56 1
+fl=(7)
+fn=(13)
+129 0 0 0 0 56 1
+
+fl=(11) ./csu/../sysdeps/nptl/libc_start_call_main.h
+fn=(21) (below main)
+74
+cfi=(12) ./stdlib/./stdlib/exit.c
+cfn=(22) exit
+calls=0 138
+74 0 0 0 0 2048 2
+fl=(12)
+fn=(22)
+138
+cfi=(12)
+cfn=(23) __run_exit_handlers
+calls=0 131
+138 0 0 0 0 2048 2
+fl=(12)
+fn=(23)
+131
+cfi=(13) UnknownFile???
+cfn=(24) _vgnU_freeres
+calls=0 0
+131 0 0 0 0 2048 2
+fl=(13)
+fn=(24)
+0
+cfi=(14) ./malloc/./malloc/set-freeres.c
+cfn=(25) __libc_freeres
+calls=0 146
+0 0 0 0 0 2048 2
+fl=(14)
+fn=(25)
+146
+cfi=(5)
+cfn=(26) __libio_freemem
+calls=0 833
+146 0 0 0 0 2048 2
+fl=(5)
+fn=(26)
+833 0 0 0 0 2048 2
+
+totals: 0 0 2828 40 2828 40

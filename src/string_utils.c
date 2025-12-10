@@ -1,4 +1,5 @@
 #include "../include/string_utils.h"
+#include "../include/mem_tracker.h"
 
 int str_to_pol(const char* str, ULL modulo, Polynomial* pol)
 {
@@ -7,7 +8,7 @@ int str_to_pol(const char* str, ULL modulo, Polynomial* pol)
 
     if (pol->coeffs != NULL)
     {
-        free(pol->coeffs);
+        free(pol->coeffs, (pol->degree + 1) * sizeof(ULL));
     }
     set_pol_params(pol, 0, modulo);
 
@@ -43,7 +44,7 @@ int str_to_pol(const char* str, ULL modulo, Polynomial* pol)
 
         if (*p < '0' || *p > '9')
         {
-            free(coeffs);
+            free(coeffs, count * sizeof(ULL));
             return POL_INVALID_ARG;
         }
 
@@ -66,7 +67,7 @@ int str_to_pol(const char* str, ULL modulo, Polynomial* pol)
         {
             if (*p != ',')
             {
-                free(coeffs);
+                free(coeffs, count * sizeof(ULL));
                 return POL_INVALID_ARG;
             }
             p++; // Пропускаем запятую
@@ -77,7 +78,7 @@ int str_to_pol(const char* str, ULL modulo, Polynomial* pol)
     while (*p == ' ') p++;
     if (*p != ')')
     {
-        free(coeffs);
+        free(coeffs, count * sizeof(ULL));
         return POL_INVALID_ARG;
     }
 
@@ -90,14 +91,14 @@ int str_to_pol(const char* str, ULL modulo, Polynomial* pol)
     ULL* result_coeffs = malloc((degree + 1) * sizeof(ULL));
     if (!result_coeffs)
     {
-        free(coeffs);
+        free(coeffs, count * sizeof(ULL));
         return POL_MEMORY_ERROR;
     }
 
     for (size_t i = 0; i <= degree; i++)
         result_coeffs[i] = coeffs[i];
 
-    free(coeffs);
+    free(coeffs, count * sizeof(ULL));
 
     set_pol_params(pol, degree, modulo);
     pol->coeffs = result_coeffs;
@@ -105,9 +106,9 @@ int str_to_pol(const char* str, ULL modulo, Polynomial* pol)
     return POL_SUCCESS;
 }
 
-int pol_to_str(const Polynomial* pol, char** str)
+int pol_to_str(const Polynomial* pol, char** str, size_t* out_size)
 {
-    if (pol == NULL || str == NULL)
+    if (pol == NULL || str == NULL || out_size == NULL)
         return POL_NULL_PTR;
 
     if (pol->coeffs == NULL)
@@ -159,6 +160,7 @@ int pol_to_str(const Polynomial* pol, char** str)
 
     *pos++ = ')';
     *pos = '\0';
+    *out_size = total_len + 1; // + '\0'
 
     return POL_SUCCESS;
 }

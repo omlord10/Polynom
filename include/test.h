@@ -15,6 +15,9 @@ enum TEST_Error
     TEST_UNKNOWN_ERROR       /* непредвиденная ошибка */
 };
 
+ULL rand64();
+
+int get_rand_pol(Polynomial* P, size_t degree, ULL modulo);
 
 /*
  * Выполняет фиксированный набор тестов (не менее 5), проверяющих корректность

@@ -1,4 +1,5 @@
 #include "../include/polynomial.h"
+#include "../include/mem_tracker.h"
 
 /*--------------------- ВСПОМОГАТЕЛЬНЫЕ ОПЕРАЦИИ ---------------------*/
 
@@ -11,7 +12,7 @@ int realloc_coeffs(Polynomial* R, size_t required_degree)
             return POL_MEMORY_ERROR;
 
         if (R->coeffs != NULL)
-            free(R->coeffs);
+            free(R->coeffs, (R->degree + 1) * sizeof(ULL));
 
         R->coeffs = new_coeffs;
     }
@@ -126,7 +127,7 @@ void free_pol(Polynomial *p)
 
     if (p->coeffs != NULL)
     {
-        free(p->coeffs);
+        free(p->coeffs, (p->degree + 1) * sizeof(ULL));
         p->coeffs = NULL;
     }
 
@@ -350,7 +351,7 @@ int pol_mul_pol(const Polynomial* A, const Polynomial* B, Polynomial* R)
     for (size_t i = 0; i <= result_degree; i++)
         R->coeffs[i] = temp_coeffs[i];
 
-    free(temp_coeffs);
+    free(temp_coeffs, (result_degree + 1) * sizeof(ULL));
     normalize_pol(R);
     return POL_SUCCESS;
 }

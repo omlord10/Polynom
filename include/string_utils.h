@@ -32,7 +32,7 @@ int str_to_pol(const char* str, ULL modulo, Polynomial* pol);
  *           POL_INVALID_ARG    — pol->coeffs == NULL
  *           POL_MEMORY_ERROR   — ошибка выделения памяти
  */
-int pol_to_str(const Polynomial* pol, char** str);
+int pol_to_str(const Polynomial* pol, char** str, size_t* out_size);
 
 
 #endif //LAB3_STRING_UTILS_H
